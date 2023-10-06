@@ -13,7 +13,7 @@ namespace Mastermind
             // Table (dont work now)
             string name;
 
-            // Welcome of player with his name and ask if you want to play //
+            // Welcome of player with his name and ask if you want to play 
             Console.WriteLine("*****************");
             Console.WriteLine("Mastermind Game");
             Console.WriteLine("*****************");
@@ -21,14 +21,16 @@ namespace Mastermind
             Console.Write("Please enter your name: ");
             name = Console.ReadLine();
             Console.WriteLine("Welcome " + name + ".");
+            int played = 17;
 
-            for (int j = 0; j < 1 ; j++)
+            // Base of the game 
+            for (int r = 0; r < 10; r++)
             {
                 /* Is the character used to initialize the string
-                   in the while loop to ensure that no more than 4 letters are generated */ 
+                   in the while loop to ensure that no more than 4 letters are generated */
                 string secret = "";
 
-                // Random combination of "RGBY" //
+                // Random combination of "RGBY" 
                 for (int i = 0; i < 4; i++)
                 {
                     int x = random.Next(4);
@@ -48,51 +50,75 @@ namespace Mastermind
                     {
                         secret = secret + 'Y';
                     }
+
                 }
-                Game();
+                // Secret Combination 
+                Console.WriteLine($"secret is {secret}");
 
-                    void Game()
+                //Attemps of loses and of Games played 
+                int attempts = 17;
+                
+                // Instructions 
+                Console.WriteLine("You need to find the secret color combination with the letters:");
+                Console.WriteLine("R-G-B-Y");
+                string guess = Console.ReadLine().ToUpper();
+
+                // Conditions of Win
+                    if (guess == secret)
                     {
-                        // Secret Combination //
-                        Console.WriteLine($"secret is {secret}");
-                        int attempts = 15;
-                        for (int x = 0; x < attempts; x++)
+                    // Message of win and option of Re-play
+                        choice();
+                    if (Console.ReadLine().ToUpper() == "N")
+                    {
+                        break;
+                    }
+                    // Message of Warning
+                        else
+                    {
+                        Console.WriteLine("Isn't an option. If you do not choose an option the game will close.");
+                        choice();
+                        if (Console.ReadLine().ToUpper() == "Y")
                         {
-                            // Instructions // 
-                            Console.WriteLine("You need to find the secret color combination with the letters:");
-                            Console.WriteLine("R-G-B-Y");
-                            string guess = Console.ReadLine();
-
-                            // Conditions win or lose //
-
-                            if (guess == secret)
+                            Console.WriteLine("Good Game!");
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    }
+                    else
+                    {
+                        // Conditions of lose 
+                        for (int y = 0; y < 10; y++)
+                        {
+                            // Shows the signs
+                            for (int i = 0; i < guess.Length; i++)
                             {
-                                Console.WriteLine("********");
-                                Console.WriteLine("You Win!");
-                                Console.WriteLine("********");
-                                Game();
-                            }
-                            else
-                            {
-                                for (int i = 0; i < guess.Length; i++)
+                                if (guess[i] == secret[i])
                                 {
-                                    if (guess[i] == secret[i])
-                                    {
-                                        Console.WriteLine("symbol " + guess[i] + " is correct");
-                                    }
+                                    Console.WriteLine("symbol " + guess[i] + " is correct");
                                 }
-
-                                Console.WriteLine("You lose :(");
                             }
+
+                            // Attemps
+                            Console.WriteLine("You lose :(");
                             attempts--;
                             Console.WriteLine("you have " + (attempts - 6) + " attempts left");
+                            Console.ReadLine();
                         }
-                        void codeSecret ()
-                    {
-
+                        // Games to play 
+                        played--;
+                        Console.WriteLine("You have " + (played - 6) + " games to play");
                     }
+
+
+                    void choice()
+                {
+                    Console.WriteLine("You want to play again [y/n]?");
+                }
+
                 }
             }
         }
     }
-}
