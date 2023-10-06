@@ -52,8 +52,8 @@ namespace Mastermind
                 }
                 // Secret Combination //
                 Console.WriteLine($"secret is {secret}");
-                int attempts = 20;
-                for (int x = 10; x < attempts; x++)
+                int attempts =15;
+                for (int x = 0; x < attempts; x++)
                 {
                     // Instructions // 
                     Console.WriteLine("You need to find the secret color combination with the letters:");
@@ -67,6 +67,7 @@ namespace Mastermind
                         Console.WriteLine("********");
                         Console.WriteLine("You Win!");
                         Console.WriteLine("********");
+                        Game();
                     }
                     else
                     {
@@ -81,7 +82,43 @@ namespace Mastermind
                         Console.WriteLine("You lose :(");
                     }
                     attempts--;
-                    Console.WriteLine("you have " + attempts + " attempts left");
+                    Console.WriteLine("you have " + (attempts - 6) + " attempts left");
+
+                    void Game()
+                    {
+                        Console.WriteLine($"secret is {secret}");
+                        int attempts = 15;
+                        for (int x = 0; x < attempts; x++)
+                        {
+                            // Instructions // 
+                            Console.WriteLine("You need to find the secret color combination with the letters:");
+                            Console.WriteLine("R-G-B-Y");
+                            string guess = Console.ReadLine();
+
+                            // Conditions win or lose //
+
+                            if (guess == secret)
+                            {
+                                Console.WriteLine("********");
+                                Console.WriteLine("You Win!");
+                                Console.WriteLine("********");
+
+                            }
+                            else
+                            {
+                                for (int i = 0; i < guess.Length; i++)
+                                {
+                                    if (guess[i] == secret[i])
+                                    {
+                                        Console.WriteLine("symbol " + guess[i] + " is correct");
+                                    }
+                                }
+
+                                Console.WriteLine("You lose :(");
+                            }
+                            attempts--;
+                            Console.WriteLine("you have " + (attempts - 6) + " attempts left");
+                        }
                 }
             }
         }
