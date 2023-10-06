@@ -21,9 +21,8 @@ namespace Mastermind
             Console.Write("Please enter your name: ");
             name = Console.ReadLine();
             Console.WriteLine("Welcome " + name + ".");
-            Console.WriteLine("Do you wanna play? [y]");
 
-            while (Console.ReadLine() == "y")
+            for (int j = 0; j < 1 ; j++)
             {
                 /* Is the character used to initialize the string
                    in the while loop to ensure that no more than 4 letters are generated */ 
@@ -50,42 +49,11 @@ namespace Mastermind
                         secret = secret + 'Y';
                     }
                 }
-                // Secret Combination //
-                Console.WriteLine($"secret is {secret}");
-                int attempts =15;
-                for (int x = 0; x < attempts; x++)
-                {
-                    // Instructions // 
-                    Console.WriteLine("You need to find the secret color combination with the letters:");
-                    Console.WriteLine("R-G-B-Y");
-                    string guess = Console.ReadLine();
-
-                    // Conditions win or lose //
-
-                    if (guess == secret)
-                    {
-                        Console.WriteLine("********");
-                        Console.WriteLine("You Win!");
-                        Console.WriteLine("********");
-                        Game();
-                    }
-                    else
-                    {
-                        for (int i = 0; i < guess.Length; i++)
-                        {
-                            if(guess[i] == secret[i])
-                            {
-                                Console.WriteLine("symbol "+ guess[i] + " is correct");
-                            }
-                        }
-
-                        Console.WriteLine("You lose :(");
-                    }
-                    attempts--;
-                    Console.WriteLine("you have " + (attempts - 6) + " attempts left");
+                Game();
 
                     void Game()
                     {
+                        // Secret Combination //
                         Console.WriteLine($"secret is {secret}");
                         int attempts = 15;
                         for (int x = 0; x < attempts; x++)
@@ -102,7 +70,7 @@ namespace Mastermind
                                 Console.WriteLine("********");
                                 Console.WriteLine("You Win!");
                                 Console.WriteLine("********");
-
+                                Game();
                             }
                             else
                             {
@@ -119,6 +87,10 @@ namespace Mastermind
                             attempts--;
                             Console.WriteLine("you have " + (attempts - 6) + " attempts left");
                         }
+                        void codeSecret ()
+                    {
+
+                    }
                 }
             }
         }
