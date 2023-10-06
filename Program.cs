@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mastermind
 {
@@ -10,32 +6,84 @@ namespace Mastermind
     {
         static void Main(string[] args)
         {
+            // Random for the combination of colors
+            Random random = new Random();
 
-            string colorCombination;
 
+            // Table (dont work now)
+            string name;
+
+            // Welcome of player with his name and ask if you want to play //
             Console.WriteLine("*****************");
             Console.WriteLine("Mastermind Game");
             Console.WriteLine("*****************");
             Console.WriteLine("");
-            Console.WriteLine("Welcome, player.");
-            Console.WriteLine("You need to find the color combination with the letters:");
-            Console.WriteLine("R-G-B");
-            colorCombination = Console.ReadLine();
+            Console.Write("Please enter your name: ");
+            name = Console.ReadLine();
+            Console.WriteLine("Welcome " + name + ".");
+            Console.WriteLine("Do you wanna play? [y]");
 
-            if (colorCombination == "GRB")
+            while (Console.ReadLine() == "y")
             {
-                Console.WriteLine("You Win!");
-                Console.ReadLine();
+                /* Is the character used to initialize the string
+                   in the while loop to ensure that no more than 4 letters are generated */ 
+                string secret = "";
+
+                // Random combination of "RGBY" //
+                for (int i = 0; i < 4; i++)
+                {
+                    int x = random.Next(4);
+                    if (x == 0)
+                    {
+                        secret = secret + 'R';
+                    }
+                    else if (x == 1)
+                    {
+                        secret = secret + 'G';
+                    }
+                    else if (x == 2)
+                    {
+                        secret = secret + 'B';
+                    }
+                    else if (x == 3)
+                    {
+                        secret = secret + 'Y';
+                    }
+                }
+                // Secret Combination //
+                Console.WriteLine($"secret is {secret}");
+                int attempts = 20;
+                for (int x = 10; x < attempts; x++)
+                {
+                    // Instructions // 
+                    Console.WriteLine("You need to find the secret color combination with the letters:");
+                    Console.WriteLine("R-G-B-Y");
+                    string guess = Console.ReadLine();
+
+                    // Conditions win or lose //
+
+                    if (guess == secret)
+                    {
+                        Console.WriteLine("********");
+                        Console.WriteLine("You Win!");
+                        Console.WriteLine("********");
+                    }
+                    else
+                    {
+                        for (int i = 0; i < guess.Length; i++)
+                        {
+                            if(guess[i] == secret[i])
+                            {
+                                Console.WriteLine("symbol "+ guess[i] + " is correct");
+                            }
+                        }
+
+                        Console.WriteLine("You lose :(");
+                    }
+                    attempts--;
+                    Console.WriteLine("you have " + attempts + " attempts left");
+                }
             }
-            else
-            {
-                Console.WriteLine("You lose");
-                Console.ReadLine();
-            }
-            
-
-
-
         }
     }
 }
