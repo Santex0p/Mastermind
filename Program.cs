@@ -138,7 +138,7 @@ namespace Mastermind
                     {
                         // Games to play 
                         played--;
-                        Console.WriteLine("You have " + (played - 5) + " games to play, press enter to continue");
+                        Console.WriteLine("You have " + (played - 7) + " games to play, press enter to continue");
                         Console.ReadLine();
                         Console.Clear();
                     }
